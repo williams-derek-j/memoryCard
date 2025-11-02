@@ -1,3 +1,4 @@
+import "../styles/Card.css"
 import { useState, useEffect } from 'react'
 
 function Card(props) {
@@ -8,18 +9,16 @@ function Card(props) {
             if (clicked) {
                 props.setScore(0)
             } else {
-                setClicked(true)
-
-                props.setScore(props.score + 1)
-
-                if (props.score > props.scoreHigh) {
-                    props.scoreHigh(props.score)
+                if (props.score >= props.scoreHigh) {
+                    props.setScoreHigh(props.score + 1)
                 }
+                props.setScore(props.score + 1) // this will cause App to rerender bc score is state on App, wherein we can reshuffle cards
+
                 setClicked(true)}
             }
         }>
-            <img className="card-img" src={props.img} alt={props.alt}/>
-            <h2 className="card-title">{props.title}</h2>
+            {/*<img className="card-img" src={props.img} alt={props.alt}/>*/}
+            <h2 className="card-title">title</h2>
         </div>
     )
 }

@@ -1,3 +1,4 @@
+import "../styles/Navbar.css"
 import { useState } from 'react'
 
 function Navbar(props) {
