@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 
 function Card(props) {
     const [clicked, setClicked] = useState(false)
+    console.log(props)
 
     return (
         <div className="card container" onClick={() => {
@@ -17,8 +18,8 @@ function Card(props) {
                 setClicked(true)}
             }
         }>
-            {/*<img className="card-img" src={props.img} alt={props.alt}/>*/}
-            <h2 className="card-title">title</h2>
+            <img className="card-img" src={props.data.img} alt={props.data.alt}/>
+            <h2 className="card-title">{props.data.name}</h2>
         </div>
     )
 }
