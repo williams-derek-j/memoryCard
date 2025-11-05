@@ -10,8 +10,6 @@ function App() {
   const [cards, setCards] = useState([])
   const cardCount = 12
 
-  const [cardData, setCardData] = useState([])
-
   useEffect(() => {
     fetch("https://rickandmortyapi.com/api/character")
         .then(res => {
@@ -20,20 +18,19 @@ function App() {
           }
           return res.json()
         }).then(data => {
-            console.log(data)
-            setCardData(data.results.slice(0, cardCount).map((card, index) => ({
+            const formatted = data.results.slice(0, cardCount).map((card, index) => ({
                 index: index,
                 id: card.id,
                 name: card.name,
                 img: card.image,
-            })))
-        console.log('cd',cardData)
-    })
-    const temp = []
-    for (let i = 0; i < cardCount; i++) {
-      temp.push(<Card data={cardData[i]} score={score} setScore={setScore} scoreHigh={scoreHigh} setScoreHigh={setScoreHigh} />)
-    }
-    setCards(temp)
+            }))
+
+            const temp = []
+            for (let i = 0; i < cardCount; i++) {
+                temp.push(<Card data={formatted[i]} score={score} setScore={setScore} scoreHigh={scoreHigh} setScoreHigh={setScoreHigh} />)
+            }
+            setCards(temp)
+        })
   }, [score])
 
   useEffect(() => {
