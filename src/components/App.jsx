@@ -7,7 +7,6 @@ function App() {
     const [score, setScore] = useState(0)
     const [scoreHigh, setScoreHigh] = useState(0)
 
-    // const [cards, setCards] = useState([])
     const cardCount = 12;
 
     const [cardData, setCardData] = useState([])
@@ -15,7 +14,7 @@ function App() {
     const [cardsClicked, setCardsClicked] = useState([])
 
     function handleClick(id) {
-        console.log('cc',cardsClicked)
+        shuffle(cardData)
 
         if (cardsClicked.includes(id)) {
             setScore(0)
@@ -28,6 +27,14 @@ function App() {
             setScore(score + 1)
 
             setCardsClicked([...cardsClicked, id])
+        }
+    }
+
+    function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1)); // find any index less than i
+
+            [arr[i], arr[j]] = [arr[j], arr[i]] // swap i and j
         }
     }
 
