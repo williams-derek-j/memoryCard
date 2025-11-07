@@ -9,7 +9,7 @@ function Navbar(props) {
 
             <div className="scoreboard">
                 <span className="score">Score: {props.score}</span>
-                <span className="scoreHigh">Highscore: {props.scoreHigh}</span>
+                <span className="scoreHigh"> -- Highscore: {props.scoreHigh}</span>
             </div>
         </div>
     )

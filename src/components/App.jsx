@@ -57,10 +57,10 @@ function App() {
     }, [])
 
     return (
-        <div>
+        <div className="app">
         <Navbar score={score} scoreHigh={scoreHigh} />
         <div className="cards container">{cardData.map(card => (
-            <Card key={card.id} img={card.img} name={card.name} handleClick={handleClick} cardsClicked={cardsClicked} setScore={setScore} setScoreHigh={setScoreHigh} score={score} scoreHigh={scoreHigh}/>
+            <Card key={card.id} img={card.img} name={card.name} handleClick={handleClick}/>
         ))}</div>
         </div>
     )
