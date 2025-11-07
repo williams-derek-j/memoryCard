@@ -4,16 +4,35 @@ import Navbar from './Navbar.jsx'
 import Card from './Card.jsx'
 
 function App() {
-  const [score, setScore] = useState(0)
-  const [scoreHigh, setScoreHigh] = useState(0)
+    const [score, setScore] = useState(0)
+    const [scoreHigh, setScoreHigh] = useState(0)
 
-  const [cards, setCards] = useState([])
-  const cardCount = 12;
+    // const [cards, setCards] = useState([])
+    const cardCount = 12;
 
-  const [cardData, setCardData] = useState([])
+    const [cardData, setCardData] = useState([])
 
-  useEffect(() => {
-    fetch("https://rickandmortyapi.com/api/character")
+    const [cardsClicked, setCardsClicked] = useState([])
+
+    function handleClick(id) {
+        console.log('cc',cardsClicked)
+
+        if (cardsClicked.includes(id)) {
+            setScore(0)
+
+            setCardsClicked([])
+        } else {
+            if (score >= scoreHigh) {
+                setScoreHigh(score + 1)
+            }
+            setScore(score + 1)
+
+            setCardsClicked([...cardsClicked, id])
+        }
+    }
+
+    useEffect(() => {
+        fetch("https://rickandmortyapi.com/api/character")
         .then(res => {
             if (!res.ok) {
             throw Error('could not fetch card character data!')
@@ -27,17 +46,17 @@ function App() {
             img: card.image,
         }))
         setCardData(formatted)
-        })
-  }, [])
+            })
+    }, [])
 
-  return (
-      <div>
+    return (
+        <div>
         <Navbar score={score} scoreHigh={scoreHigh} />
         <div className="cards container">{cardData.map(card => (
-            <Card key={card.id} img={card.img} name={card.name} setScore={setScore} setScoreHigh={setScoreHigh} score={score} scoreHigh={scoreHigh}/>
+            <Card key={card.id} img={card.img} name={card.name} handleClick={handleClick} cardsClicked={cardsClicked} setScore={setScore} setScoreHigh={setScoreHigh} score={score} scoreHigh={scoreHigh}/>
         ))}</div>
-      </div>
-  )
+        </div>
+    )
 }
 
 export default App
